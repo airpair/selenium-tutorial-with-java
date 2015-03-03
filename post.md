@@ -6,9 +6,8 @@ An excerpt from Selenium's [home page](http://seleniumhq.org),
 
 Selenium allows you to emulate user interaction with a web page.
 
----
-
 ### Prerequisites
+
 We need a few things first to get up and running using Selenium..
 
 1. A JRE/JDK installed
@@ -19,15 +18,12 @@ We need a few things first to get up and running using Selenium..
 **\#1**: **[Download and Install a JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)**
 
 **\#2**: **[Proceed to *Configuring your IDE* &raquo;](#configuring-your-ide)**
-<br><br>
-
----
 
 ### Configuring your IDE
 
 There are several IDE's out there such as Eclipse, NetBeans etc.  In this tutorial, we will be using IntelliJ IDEA Community Edition to get you started because it is quick to get up and running with this tutorial.
 
-### [&raquo; Download IntelliJ IDEA Community Edition &laquo;](https://www.jetbrains.com/idea/#community_edition)
+> [&raquo; Download IntelliJ IDEA Community Edition &laquo;](https://www.jetbrains.com/idea/#community_edition)
 
 On the IntelliJ IDEA Community Edition webpage, scroll down the page until you see Download links.
 
