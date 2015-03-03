@@ -58,7 +58,7 @@ Follow these steps:
 5. Click finish.  *Upon startup, you may see a "Tip of the Day" window pop up.  Close this.*  **At this point,** you will see an XML file open.  This XML file is the Maven pom (or Project Object Model).  The pom is a file dedicated to managing dependencies, and other configurations that your project has, such as plugins, and test goals.
 
 6. With the Maven pom still open, we are ready to bring in the [Conductor framework](http://conductor.ddavison.io).  The Conductor Framework is a wrapper around Selenium 2 that is extremely fast to get up and running with Selenium 2, as well as very easy to learn and easy to use.  **In the pom XML file that is open,**  We are going to type the following code under `<version>...</version>`.
-```xml
+```markup
 <project...>
   ...
   <version>1.0-SNAPSHOT</version>
@@ -104,8 +104,6 @@ You are looking at the standard project hierarchy for Maven.
 
 First, [let's prepare our project &raquo;](#preparation) with the Conductor framework.
 
----
-
 ### Preparation
 
 In order for Conductor (and Selenium for that matter,) you need respective WebDriver executables to be installed inside of the project path to use.
@@ -117,7 +115,7 @@ After you follow the instructions for your respective platform, you will see the
 *Screenshot*
 ![chromedriver](http://i.imgur.com/8NfzTEk.png)
 
-####[Continue to the test cases &raquo;](#the-test-cases)
+> [Continue to the test cases &raquo;](#the-test-cases)
 
 ---
 
@@ -133,7 +131,7 @@ The test cases that we will be testing on SeleniumHQ.org, follow:
 
 ![case2](http://i.imgur.com/3BgIoOo.png)
 
-#### [Proceed to writing the library... &raquo;](#writing-a-library)
+> [Proceed to writing the library... &raquo;](#writing-a-library)
 
 ---
 
@@ -255,7 +253,7 @@ public class SeleniumHQTest extends Locomotive {
 
 ```
 
-## Test Case #1 - Validate that the download link exists.
+### Test Case #1 - Validate that the download link exists.
 ```java
     public void testDownloadLinkExists() {
         validatePresent(HomePage.LOC_LNK_DOWNLOADSELENIUM);
@@ -267,7 +265,7 @@ Here, we are just validating that the `LOC_LNK_DOWNLOADSELENIUM` (The "Download 
 
 > **Right click the method `testDownloadLinkExists` and click `"Run testDownloadLinkExists()"`**
 
-## Test Case #2 - Validate that all tabs exist.
+### Test Case #2 - Validate that all tabs exist.
 ```java
     public void testTabsExist() {
         validatePresent(HomePage.LOC_LNK_PROJECTSTAB)
