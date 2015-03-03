@@ -117,8 +117,6 @@ After you follow the instructions for your respective platform, you will see the
 
 > [Continue to the test cases &raquo;](#the-test-cases)
 
----
-
 ### The Test Cases
 
 The test cases that we will be testing on SeleniumHQ.org, follow:
