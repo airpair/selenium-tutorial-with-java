@@ -1,15 +1,14 @@
-# Introduction
+## Introduction
 
 **What is Selenium?**
 An excerpt from Selenium's [home page](http://seleniumhq.org),
 > Selenium automates browsers. that's it.
 
 Selenium allows you to emulate user interaction with a web page.
-<br><br>
 
 ---
 
-# Prerequisites
+### Prerequisites
 We need a few things first to get up and running using Selenium..
 
 1. A JRE/JDK installed
@@ -24,7 +23,7 @@ We need a few things first to get up and running using Selenium..
 
 ---
 
-##Configuring your IDE
+### Configuring your IDE
 
 There are several IDE's out there such as Eclipse, NetBeans etc.  In this tutorial, we will be using IntelliJ IDEA Community Edition to get you started because it is quick to get up and running with this tutorial.
 
@@ -40,7 +39,7 @@ Once you've downloaded the installer, follow the steps through.
 
 ---
 
-# Let's get started...
+## Let's get started...
 Follow these steps:
 
 1. **We will click "Create New Project"**
@@ -142,7 +141,7 @@ The test cases that we will be testing on SeleniumHQ.org, follow:
 
 ---
 
-# Writing a library
+## Writing a library
 
 In order for Selenium to know what to interact with, a good practice that the Conductor framework fits well with, is to map the elements you need in your application inside of a Java class.
 
@@ -202,7 +201,7 @@ Now that our library is prepared, let's **[Continue on, and write our test &raqu
 
 ---
 
-# Writing the test
+## Writing the test
 
 *We will be using jUnit in this tutorial, which comes packaged with IntelliJ.*
 
@@ -291,7 +290,7 @@ One of the beautiful things about the Conductor framework which makes it so easy
 
 ---
 
-# Conclusion
+## Conclusion
 This is the end of the tutorial, and I do hope this helped you see how Selenium can work using Java.
 
 It should be noted that by no means are you required to use the Conductor framework in your Selenium future, we had used the Conductor framework in this tutorial to show you a good effective test writing strategy.
