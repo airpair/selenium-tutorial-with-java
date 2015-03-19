@@ -1,23 +1,43 @@
 ## Introduction
 
+This tutorial is designed to help you get familiar with what Selenium WebDriver is, and how you can use it to automate manual interactions with a web page.
+
+By the end of this tutorial, you can expect to know...
+
+- How Selenium can help you perform manual tasks on web applications with ease
+- How to write a Library that maps out your web pages
+- How to Write a Selenium test
+
+I will be guiding you through the process of...
+
+1. Setting up your computer with a JDK
+2. Installing / Configuring an IDE (Integrated Development Environment)
+3. Writing a library
+4. Writing your first tests
+
+First, let's talk about Selenium.
+
 **What is Selenium?**
 An excerpt from Selenium's [home page](http://seleniumhq.org),
 > Selenium automates browsers. that's it.
 
-Selenium allows you to emulate user interaction with a web page.
+Selenium enables you to emulate user interaction with a web page.
 
-### Prerequisites
+**What is WebDriver?**
+WebDriver is now an official [W3C Specification](http://www.w3.org/TR/webdriver/), and in-short, it is a method of interacting with a web browser.  Previously, with Selenium RC, Selenium would operate with the browser by injecting JavaScript to interact with elements.  With the adoption of WebDriver, browser manufacturers like Google, Mozilla, and Microsoft release their browser with the ability to be controlled by a hook, that Selenium can tap into.  This hook enables Selenium to interact with the webbrowser in the same way that humans do.
+
+## Lets get started...
+
+### Setting up your computer with a JDK
 
 We need a few things first to get up and running using Selenium..
 
 1. A JRE/JDK installed
 2. A Java IDE
 
-*If you already have a JRE/JDK and have done Java programming before, continue to \#2*
+*If you already have a JRE/JDK and have done Java programming before, you may continue to [Configuring your IDE](#configuring-your-ide)*
 
 **\#1**: **[Download and Install a JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)**
-
-**\#2**: **[Proceed to *Configuring your IDE* &raquo;](#configuring-your-ide)**
 
 ### Configuring your IDE
 
@@ -35,7 +55,7 @@ Once you've downloaded the installer, follow the steps through.
 
 ---
 
-## Let's get started...
+## Setting up your Project...
 Follow these steps:
 
 1. **We will click "Create New Project"**
@@ -57,7 +77,7 @@ Follow these steps:
 
 5. Click finish.  *Upon startup, you may see a "Tip of the Day" window pop up.  Close this.*  **At this point,** you will see an XML file open.  This XML file is the Maven pom (or Project Object Model).  The pom is a file dedicated to managing dependencies, and other configurations that your project has, such as plugins, and test goals.
 
-6. With the Maven pom still open, we are ready to bring in the [Conductor framework](http://conductor.ddavison.io).  The Conductor Framework is a wrapper around Selenium 2 that is extremely fast to get up and running with Selenium 2, as well as very easy to learn and easy to use.  **In the pom XML file that is open,**  We are going to type the following code under `<version>...</version>`.
+6. With the Maven pom still open, we are ready to bring in the [Conductor framework](http://conductor.ddavison.io).  The Conductor Framework is a wrapper around Selenium WebDriver that is extremely fast to get up and running with Selenium WebDriver, as well as very easy to learn and easy to use.  **In the pom XML file that is open,**  We are going to type the following code under `<version>...</version>`.
 ```markup
 <project...>
   ...
@@ -77,7 +97,7 @@ Follow these steps:
 *After typing this in, IntelliJ should display a dialog box that says "Maven projects need to be imported" ***Click `"Import Changes"`**  This is because Maven detected that we added a dependency to our project.
 ![maven-dependency](http://i.imgur.com/Htx7gUY.png)
 
-[You are now ready to start writing your test! &raquo;](#writing-our-first-test)
+You are now ready to start writing your test! &raquo;
 
 ---
 
@@ -102,24 +122,23 @@ You are looking at the standard project hierarchy for Maven.
 
 **Today, we will be automating the SeleniumHQ [home page](http://seleniumhq.org).**
 
-First, [let's prepare our project &raquo;](#preparation) with the Conductor framework.
+First, let's prepare our project with the Conductor framework.
 
 ### Preparation
 
-In order for Conductor (and Selenium for that matter,) you need respective WebDriver executables to be installed inside of the project path to use.
+In order for Selenium to work, you need WebDriver executables. The Conductor framework makes this simple, and allows you to simply put them into the project path.
 
-[See the Conductor documentation](https://github.com/ddavison/conductor/wiki/WebDriver-Executables) to install the ChromeDriver binary.
+We are going to start out with the ChromeDriver executable to power Google Chrome.  **[See the Conductor documentation](https://github.com/ddavison/conductor/wiki/WebDriver-Executables) to install the ChromeDriver binary.**
 
 After you follow the instructions for your respective platform, you will see the executable within the `selenium-tutorial/` project folder.
 
-*Screenshot*
-![chromedriver](http://i.imgur.com/8NfzTEk.png)
-
-> [Continue to the test cases &raquo;](#the-test-cases)
+Now that we have our project all set up, and our WebDriver executable in place, we are ready to take a look at what we are going to be testing today.
 
 ### The Test Cases
 
-The test cases that we will be testing on SeleniumHQ.org, follow:
+We will be testing some very basic things on SeleniumHQ.org.  The official Selenium project website.
+
+We will have two test cases that we will be using Selenium to automate.
 
 > **Test Case #1**: When I navigate to seleniumhq.org, a "Download Selenium" link appears on the page.
 
@@ -129,7 +148,7 @@ The test cases that we will be testing on SeleniumHQ.org, follow:
 
 ![case2](http://i.imgur.com/3BgIoOo.png)
 
-> [Proceed to writing the library... &raquo;](#writing-a-library)
+Now, before we start writing our tests, let's flesh out our page libraries.
 
 ---
 
@@ -139,26 +158,31 @@ In order for Selenium to know what to interact with, a good practice that the Co
 
 Since we are automating SeleniumHQ's home page, our libraries will consist of objects that can be found on SeleniumHQ.
 
-*(If you haven't yet, please review the [Test Cases](the_test_cases) so you know what we are testing)*
+*(If you haven't yet, please review the [Test Cases](#the-test-cases) so you know what we are testing)*
 
 A library can be defined simply as: `"A Java Class that maps objects on the page, so the tests can use them."`
 
-*Why a library?*  Imagine we have a hundred test cases.  What happens when SeleniumHQ changes the selectors around?  Now we will have to find and replace a hundred selectors.  A library keeps things organized, and maintainable in one place.
+*Why a library?*  Imagine we have a hundred test cases.  What happens when SeleniumHQ changes the elements around? For example, then change a `<div>` element to a `<span>` element, or even change an `id=` attribute.  Now we will have to find and replace a hundred selectors to get the tests working again.  A library keeps things organized, and maintainable in one place.  Once you update the library, all tests will be updated as well.
 
-1. Before we actually write the library, however, we need a package to put it under.  Let's right click `src/main/java`, and click `"New Package"`.
+* Before we actually write the library, however, we need a package to put it under.  Let's right click `src/main/java`, and click `"New Package"`.
 
-2. Name the package the same name as we did in the pom XML file (i.e. the GroupId(`com.mysite`) that we filled into maven earlier, appended by the ArtifactId(`selenium`))  **Fill in `com.mysite.selenium` for the package name**
+![new package](http://i.imgur.com/p5vYVWN.png)
 
-3. Right click the new package, and click `New->Java Class` and name this class `HomePage`
+* Name the package the same name as we did in the pom XML file (i.e. the GroupId(`com.mysite`) that we filled into maven earlier, appended by the ArtifactId(`selenium`))  **Fill in `com.mysite.selenium` for the package name** and click OK
+
+* Right click the new package, and click `New->Java Class` and name this class `HomePage`
   * This class is called `HomePage` because it is going to map out the objects we need, from SeleniumHQ
+  
+![new javaclass](http://i.imgur.com/HhmQ2es.png)  
 
-4. **Let's map out the objects we need**. According to the [test cases](the_test_cases) we are going to be needing to interact with all of the following elements:
-  - "Projects" tab
-  - "Download" tab
-  - "Documentation" tab
-  - "Support" tab
-  - "About" tab
-  - "Download Selenium" link
+* **Let's map out the objects we need**. If you recall our test cases, we are going to be needing to interact with all of the following elements:
+  - "Projects" tab - *because #2 says we need to validate the tab is there*
+  - "Download" tab - *because #2 says we need to validate the tab is there*
+  - "Documentation" tab - *because #2 says we need to validate the tab is there*
+  - "Support" tab - *because #2 says we need to validate the tab is there*
+  - "About" tab - *because #2 says we need to validate the tab is there*
+  - "Download Selenium" link - *because #1 says we need to validate that the download link is there*
+  
 
 Each of these elements is going to be mapped out in our library.
 
@@ -187,13 +211,17 @@ We are adding the `public static final` modifiers to these fields because *one*,
 
 The name, `LOC_LNK_PROJECTSTAB` is an easy moniker to figure out what you are selecting.  The `LOC_` simply means that this is a locator (so we dont get confused if we add things later).  The `LNK_` part, is based on the application of [hungarian notation](http://wikipedia.org/wiki/Hungarian_notation).  Since the element we are going to find is a Link, it is `LNK_`.  Respectively, if we are going to interact with an Input, it will be `LOC_TXT_` since it's a text box.  `LOC_BTN_` if it's a button.  It helps keep your libraries organized.
 
-The values of these fields are CSS Selectors, combined with other Selenium selector strategies like `xpath` and `linkText`.  The Conductor framework is designed to utilize CSS most because of its simplicity, and readability, but of course the Conductor framework will still work if you prefer other selector strategies.  *[See more on writing effective css selectors for selenium](http://ddavison.io/css/2014/02/18/effective-css-selectors.html)*.
+The values of these fields are CSS Selectors, combined with other Selenium selector strategies like `xpath` and `linkText`.  The Conductor framework is designed to utilize CSS most because of its simplicity, and readability, but of course the Conductor framework will still work if you prefer other selector strategies.  We got these selectors (like `li#menu_about a[href$='about/']`) by using Google Chrome's Developer Tools to find out how to uniquely select the element we need.  We can Right click an element, and click "Inspect Element" and we can then see the HTML.  Based on the HTML, we can create CSS selectors.
 
-Now that our library is prepared, let's **[Continue on, and write our test &raquo;](#writing-the-test)**
+![inspect element](http://i.imgur.com/ItfQpvq.png)
+
+*[See more on writing CSS selectors for selenium](http://ddavison.io/css/2014/02/18/effective-css-selectors.html)*.
+
+**Now that our library is prepared, let's write our tests...**
 
 ---
 
-## Writing the test
+## Writing the tests
 
 *We will be using jUnit in this tutorial, which comes packaged with IntelliJ.*
 
@@ -202,7 +230,7 @@ Now that our library is prepared, let's **[Continue on, and write our test &raqu
 
 3. Right click the newly created package, and click `New->Java Class` and name this class `SeleniumHQTest`
 
-4. Inside the newly created class, let's add one test method for each [test case](#the-test-cases)
+4. Inside the newly created class, let's add one test method for each test case
 
 ```java
 package com.mysite.selenium;
@@ -282,14 +310,32 @@ One of the beautiful things about the Conductor framework which makes it so easy
 
 ---
 
-## Conclusion
+## Conclusion / Next Steps
 This is the end of the tutorial, and I do hope this helped you see how Selenium can work using Java.
 
-It should be noted that by no means are you required to use the Conductor framework in your Selenium future, we had used the Conductor framework in this tutorial to show you a good effective test writing strategy.
+It should be noted that by no means are you required to use the Conductor framework in your Selenium future, we had used the Conductor framework in this tutorial to show you a good effective test writing strategy.  I urge you to [browse through the source](https://github.com/ddavison/conductor/blob/master/src/main/java/io/ddavison/conductor/Locomotive.java#L45) to see exactly how Conductor wraps Selenium to make it easier.
 
-It also should be noted, that you are by no means restricted to IntelliJ IDEA Community Edition either.  This software is meant for educational, and open-source purposes.  You are perfectly able to setup the exact same testing infrastructure using any IDE, using any Test Framework.
+It also should be noted, that you are by no means restricted to IntelliJ IDEA Community Edition either.
 
-Thanks so much!
+Selenium allows you to automate your web browser, in many ways you see fit.  Here is a list of things that you can and cannot do with Selenium
+
+Selenium can...
+
+- Fill in text boxes
+- Check checkboxes, radio buttons
+- Click buttons and links
+- Navigate to and from `<iframe>`'s
+- Navigate to and from new windows / tabs created from links
+- Interact with most elements just like a human would
+
+Selenium **cannot**...
+
+- Interact with flash, PDF, or Java Applets
+- Cannot interact with any embedded object put in by either `<object>`, or `<embed>`
+
+To give you a taste of what Conductor has to offer with Selenium, you can take a look through [this page](https://github.com/ddavison/conductor#actions) to see what all you can do.
+
+As an exercise using the framework we just set up, see what kind of things you can do on http://seleniumhq.org by creating new test methods in `SeleniumHQTest.java`.
 
 ---
 *Author Information* / *Links*:
@@ -298,10 +344,10 @@ Name: Daniel Davison
 GitHub: http://github.com/ddavison
 Conductor Framework: http://conductor.ddavison.io
 Twitter: @sircapsalot
+Website: http://ddavison.io
 
   Daniel is an avid pursuer of test automation,
   and the value that it can bring for companies.
   Daniel is on StackOverflow, and regulars the [selenium]
-  tag and in the top 10 worldwide of upvotes, and top 2 of
-  number of answers.
+  tag, as well as contributes to the Selenium project in various ways.
 ```
