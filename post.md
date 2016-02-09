@@ -89,7 +89,7 @@ Follow these steps:
       <dependency>
           <groupId>io.ddavison</groupId>
           <artifactId>conductor</artifactId>
-          <version>1.1</version>
+          <version>2.1.1</version>
       </dependency>
   </dependencies>
 </project>
