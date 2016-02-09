@@ -89,13 +89,13 @@ Follow these steps:
       <dependency>
           <groupId>io.ddavison</groupId>
           <artifactId>conductor</artifactId>
-          <version>2.1.1</version>
+          <version>1.1</version>
       </dependency>
   </dependencies>
 </project>
 ```
 *After typing this in, IntelliJ should display a dialog box that says "Maven projects need to be imported" ***Click `"Import Changes"`**  This is because Maven detected that we added a dependency to our project.
-![maven-dependency](http://i.imgur.com/Htx7gUY.png)
+![maven-dependency](http://i.imgur.com/Qwe1Tkd.png)
 
 You are now ready to start writing your test! &raquo;
 
