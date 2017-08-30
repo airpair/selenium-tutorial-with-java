@@ -89,7 +89,7 @@ Follow these steps:
       <dependency>
           <groupId>io.ddavison</groupId>
           <artifactId>conductor</artifactId>
-          <version>2.1.1</version>
+          <version>3.0.1</version>
       </dependency>
   </dependencies>
 </project>
@@ -348,6 +348,8 @@ Website: http://ddavison.io
 
   Daniel is an avid pursuer of test automation,
   and the value that it can bring for companies.
-  Daniel is on StackOverflow, and regulars the [selenium]
-  tag, as well as contributes to the Selenium project in various ways.
+  Daniel helps out on StackOverflow with Selenium
+  question,; author of the Conductor framework, as
+  well as a core committer on the SeleniumHQ team. 
+
 ```
